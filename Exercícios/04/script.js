@@ -8,12 +8,23 @@ app.get("/", function(requisicao,resposta){
 });
 
 
-app.get("/blog", function(req, res){
-    res.send("<strong>Bem vindo ao meu blog!</strong>");
+app.get("/blog/:artigo?", function(req, res){
+    let artigo = req.params.artigo;
+    if(artigo) {
+        res.send("<h2>Artigo: " + artigo + " </h2>");
+    } else {
+        res.send("<h3>Artigo não definido</h3>")
+    }
 });
 
 app.get("/canal/youtube", function(req, res){
-    res.send("<h1>Bem vindo ao meu canal!</h1>");
+    var canal = req.query["canal"];
+    if(canal) {
+        res.send(canal);
+    } else {
+        res.send("Nenhum canal fornecido!");
+    }
+    
 });
 
 app.listen(4000, function(erro){
