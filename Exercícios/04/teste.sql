@@ -1,5 +1,1 @@
-create TABLE usuarios(
-    nome VARCHAR(50),
-    email VARCHAR(100),
-    idade INT(3)
-);
+delete from usuarios where
