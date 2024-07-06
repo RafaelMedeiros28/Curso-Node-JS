@@ -1,23 +1,22 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
-app.get("/:nome/:lang",(req, res) => {
-    let nome = req.params.nome;
-    let lang = req.params.lang;
-    let exibirMsg = true;
-
-
-    res.render("index", {
-        nome: nome,
-        lang: lang,
-        empresa: "Minha empresa",
-        funcionarios: 9000,
-        msg: exibirMsg
-    });
+app.get("/perguntar", (req, res) => {
+    res.render("index");
 });
 
-app.listen(8080,()=>{
+app.post("/salvarpergunta", (req, res) => {
+    let titulo = req.body.titulo;
+    let descricao = req.body.descricao;
+    res.send("Formulário recebido! titulo: "  + titulo + " " + "descricao:" + " " + descricao);
+});
+
+app.listen(8080,() => {
     console.log("APP rodando com sucesso!");
 });
