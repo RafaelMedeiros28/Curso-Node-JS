@@ -1,6 +1,18 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const connection = require("./database/database");
+const colors = require("colors");
+connection
+    .authenticate()
+    .then(() => {
+        console.log("Conexão com banco de dados realizada com sucesso".blue)
+    })
+    .catch((msgErro) => {
+        console.log(msgErro);
+    })
+
+
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -18,5 +30,5 @@ app.post("/salvarpergunta", (req, res) => {
 });
 
 app.listen(8080,() => {
-    console.log("APP rodando com sucesso!");
+    console.log("Aplicação inicializada com sucesso!".blue);
 });
